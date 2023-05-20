@@ -38,10 +38,14 @@ def main():
     if uploaded_file is not None:
         # Display the uploaded image
         image = Image.open(uploaded_file)
+        res_image = image.resize((224, 224))
+        colored_image = res_image.convert('RGB')
         #image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
         #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         st.image(image, caption="Uploaded Image", use_column_width=True)
-        image = np.array(image)
+        image = np.array(colored_image)
+        image = np.expand_dims(image, axis=0)
+        print(image.shape)
         #image = cv2.resize(image, (224, 224))
         
 
